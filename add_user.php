@@ -10,11 +10,16 @@ echo "Connected!<br>";
 
 //function add_user ($email, $password) {
 	//global $conn;
+	$firstname = mysqli_real_escape_string($conn, $_POST['firstname']);
+	$lastname = mysqli_real_escape_string($conn, $_POST['lastname']);
 	$email = mysqli_real_escape_string($conn, $_POST['email']);
 	$password = mysqli_real_escape_string($conn, $_POST['password']);
 	$hash = password_hash($password, PASSWORD_DEFAULT);
-	$sql = "INSERT INTO users (email, password) VALUES (" . "'" . $email ."', " . "'" . $hash . "')";
-	echo $sql . "<br>";
+	$username = preg_replace('/[^A-Za-z]/', '', $firstname . $lastname);
+	$username = strtolower($username);
+
+	$sql = "INSERT INTO users (firstname, lastname, username, email, password) VALUES ('" . $firstname . "'" . ", "  ."'" . $lastname . "'" . ", "  ."'" . $username . "'" .", " . "'" . $email ."'" . ", " . "'" . $hash . "')";
+	//echo $sql . "<br>";
 	
 	if (mysqli_query($conn, $sql)) {
 		$returnMsg["message"] = "Successful DB entry!";
@@ -26,6 +31,7 @@ echo "Connected!<br>";
 		include('error_page.html');
 		exit();
 	}
+
 	mysqli_close($conn);
 	
 //}

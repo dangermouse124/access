@@ -1,8 +1,11 @@
 <?php
-function is_valid_login ($email, $password) {
+function is_valid_login ($username, $password) {
 	global $conn;
-	$sql = "SELECT password FROM users WHERE email='" . $email ."'";
-	echo "<br>" . $sql;
+	
+	$username = mysqli_real_escape_string($conn, $username);
+	
+	$sql = "SELECT password FROM users WHERE username='" . $username ."'";
+	//echo "<br>" . $sql;
 	
 	$result = mysqli_query($conn, $sql);
 	$row = mysqli_fetch_array($result,MYSQLI_ASSOC);
@@ -10,6 +13,5 @@ function is_valid_login ($email, $password) {
 	return password_verify($password, $hash);
 	
 }
-
 
 ?>

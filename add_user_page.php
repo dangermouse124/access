@@ -35,12 +35,19 @@ background-color: Lightgrey;
 <div class="w3-container"> 
 	<div class="w3-card-4 w3-dark-grey w3-padding" style="width:95%">
 		<h2><font color="black">Add a User</font></h2><br>
-		<form id="add_user" action="add_user.php" method="POST">	
+		<form id="add_user" action="add_user.php" method="POST">
+			First name: 
+			<input type="text" name="firstname" id="firstname">
+			
+			Last name: 
+			<input type="text" name="lastname" id="lastname">	
+			<br><br>
+		
 			Email: 
-			<input type="text" name="email" id="email">
+			<input type="email" name="email" id="email">
 						
 			Password:
-			<input type="text" name="password" id="password">
+			<input type="password" name="password" id="password">
 						
 			<div class="w3-container w3-margin w3-text-orange">
 			<button class="btn" type="submit"><i class="fa fa-plus"></i> Add User</button>
