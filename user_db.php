@@ -7,28 +7,24 @@ if (!$conn) {
 }
 echo "Connected!<br>";
 
+$email = "test@email.com";
+$password = "password";
+$hash = password_hash($password, PASSWORD_DEFAULT);
+$sql = "INSERT INTO users (email, password) VALUES (" . "'" . $email ."', " . "'" . $hash . "')";
+echo $sql . "<br>";
 
-//function add_user ($email, $password) {
-	//global $conn;
-	$email = "test@email.com";
-	$password = "password";
-	$hash = password_hash($password, PASSWORD_DEFAULT);
-	$sql = "INSERT INTO users (email, password) VALUES (" . "'" . $email ."', " . "'" . $hash . "')";
-	echo $sql . "<br>";
+if (mysqli_query($conn, $sql)) {
+        $returnMsg["message"] = "Successful DB entry!";
+        include('success_page.html');
+        exit();
+
+} else {
+        $returnMsg["message"] = "Error: " . $sql . "<br>" . mysqli_error($conn);
+        include('error_page.html');
+        exit();
+}
+mysqli_close($conn);
 	
-	if (mysqli_query($conn, $sql)) {
-		$returnMsg["message"] = "Successful DB entry!";
-		include('success_page.html');
-		exit();
-	
-	} else {
-		$returnMsg["message"] = "Error: " . $sql . "<br>" . mysqli_error($conn);
-		include('error_page.html');
-		exit();
-	}
-	mysqli_close($conn);
-	
-//}
 
 
 ?>
